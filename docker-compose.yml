@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine  
+    container_name: garybot_db
+    environment:
+      - POSTGRES_USER=garyuser
+      - POSTGRES_PASSWORD=garypass
+      - POSTGRES_DB=garybotdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432" 
+
+  api:
+    build: .  
+    container_name: garybot_api
+    env_file: .env 
+    ports:
+      - "8000:8000" 
+    volumes:
+      - .:/app  
+      - ./generated_images:/app/generated_images
+    environment:
+      
+      - DATABASE_URL=postgresql://garyuser:garypass@db:5432/garybotdb
+    depends_on:
+      - db 
+
+volumes:
+  postgres_data:

@@ -1,0 +1,17 @@
+# requirements.txt
+
+fastapi
+uvicorn
+python-multipart  
+pydantic
+pandas
+python-docx
+Pillow
+reportlab
+psycopg2-binary
+openai
+python-dotenv
+requests
+googlesearch-python
+beautifulsoup4 
+tqdm
